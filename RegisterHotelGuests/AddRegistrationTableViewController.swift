@@ -17,6 +17,11 @@ class AddRegistrationTableViewController: UITableViewController {
     @IBOutlet weak var checkInDatePicker: UIDatePicker!
     @IBOutlet weak var checkOutDateLabel: UILabel!
     @IBOutlet weak var checkOutDatePicker: UIDatePicker!
+    @IBOutlet weak var numberOfAdultsStepper: UIStepper!
+    @IBOutlet weak var numberOfChildrenStepper: UIStepper!
+    @IBOutlet weak var numberOfAdultsLabel: UILabel!
+    @IBOutlet weak var numberOfChildrenLabel: UILabel!
+    @IBOutlet weak var wifiSwitch: UISwitch!
     
     //MARK: - QUESTION - "??" ???
     @IBAction func doneBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -25,6 +30,9 @@ class AddRegistrationTableViewController: UITableViewController {
         let email = emailTextField.text ?? ""
         let checkInDate = checkInDatePicker.date
         let checkOutDate = checkOutDatePicker.date
+        let numberOfAdults = Int(numberOfAdultsStepper.value)
+        let numberOfChildren = Int(numberOfChildrenStepper.value)
+        let hasWifi = wifiSwitch.isOn
     
         print("DONE TAPPED")
         print("firstName: \(firstName)")
@@ -32,9 +40,18 @@ class AddRegistrationTableViewController: UITableViewController {
         print("email: \(email)")
         print("checkIn: \(checkInDate)")
         print("checkOut: \(checkOutDate)")
+        print("numberOfAdults: \(numberOfAdults)")
+        print("numberOfChildren: \(numberOfChildren)")
+        print("wifi: \(hasWifi)")
     }
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         updateDateViews()
+    }
+    
+    @IBAction func stepperValueChanged(_ sender: UIStepper) {
+    updateAdultsAndChildrenLabels()
+    }
+    @IBAction func wifiSwitchChanged(_ sender: UISwitch) {
     }
     
     let checkInDatePickerCellIndexPath = IndexPath(row: 1, section: 1)
@@ -56,6 +73,7 @@ class AddRegistrationTableViewController: UITableViewController {
         super.viewDidLoad()
         resetCheckInDatePickerToToday()
         updateDateViews()
+        updateAdultsAndChildrenLabels()
     }
 
     func resetCheckInDatePickerToToday() {
@@ -101,7 +119,6 @@ class AddRegistrationTableViewController: UITableViewController {
             
             tableView.beginUpdates()
             tableView.endUpdates()
-            
         case (checkOutDatePickerCellIndexPath.section, checkOutDatePickerCellIndexPath.row - 1):
             if isCheckOutDatePickerShown {
                 isCheckOutDatePickerShown = false
@@ -111,15 +128,15 @@ class AddRegistrationTableViewController: UITableViewController {
             } else {
                 isCheckOutDatePickerShown = true
             }
-
+            //MARK: - QUESTION: are these built in functions and what do they do exactly???
             tableView.beginUpdates()
             tableView.endUpdates()
-        
         default: break
         }
     }
     
-    func hideUnhidePickers (indexPath: IndexPath) {
-        
+    func updateAdultsAndChildrenLabels() {
+        numberOfAdultsLabel.text = "\(Int(numberOfAdultsStepper.value))"
+        numberOfChildrenLabel.text = "\(Int(numberOfChildrenStepper.value))"
     }
 }
