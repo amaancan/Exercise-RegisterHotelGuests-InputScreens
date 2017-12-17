@@ -126,6 +126,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="535083259.22370398">
                                                         <!--2017-12-16 02:14:19 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="datePickerValueChanged:" destination="ZVP-xh-nkJ" eventType="valueChanged" id="x7J-f0-ort"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -172,6 +175,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="535083287.48992097">
                                                         <!--2017-12-16 02:14:47 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="datePickerValueChanged:" destination="ZVP-xh-nkJ" eventType="valueChanged" id="TM5-Db-ab7"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -198,6 +204,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="checkInDateLabel" destination="XlT-ju-unt" id="bwC-Tu-jMt"/>
+                        <outlet property="checkInDatePicker" destination="Yrp-PN-yoe" id="9Ti-9m-Xx6"/>
+                        <outlet property="checkOutDateLabel" destination="oNt-GH-qIS" id="DTQ-EY-Bbd"/>
+                        <outlet property="checkOutDatePicker" destination="JDO-1g-QLI" id="KkA-lR-Ytu"/>
                         <outlet property="emailTextField" destination="1lK-bE-vB6" id="gWR-ed-0E0"/>
                         <outlet property="firstNameTextField" destination="GFg-td-SfL" id="8uw-y1-CXz"/>
                         <outlet property="lastNameTextField" destination="nj0-Tc-QTi" id="RH7-9o-b3B"/>
