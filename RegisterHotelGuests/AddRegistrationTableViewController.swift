@@ -74,6 +74,7 @@ class AddRegistrationTableViewController: UITableViewController {
         resetCheckInDatePickerToToday()
         updateDateViews()
         updateAdultsAndChildrenLabels()
+        print(RoomType.all) //TODO: - QUESTION - RoomType is a struct therefore don't need () to access it's variable 'all' but if it was a class, then we would need ()???
     }
 
     func resetCheckInDatePickerToToday() {
@@ -128,8 +129,8 @@ class AddRegistrationTableViewController: UITableViewController {
             } else {
                 isCheckOutDatePickerShown = true
             }
-            //MARK: - QUESTION: are these built in functions and what do they do exactly???
-            tableView.beginUpdates()
+            
+            tableView.beginUpdates() //TODO: - QUESTION: are these built in functions and what do they do exactly???
             tableView.endUpdates()
         default: break
         }
@@ -139,4 +140,36 @@ class AddRegistrationTableViewController: UITableViewController {
         numberOfAdultsLabel.text = "\(Int(numberOfAdultsStepper.value))"
         numberOfChildrenLabel.text = "\(Int(numberOfChildrenStepper.value))"
     }
+}
+
+struct Registration {
+    var firstName: String
+    var lastName: String
+    var emailAddress: String
+    
+    var checkInDate: Date
+    var checkOutDate: Date
+    var numberOfAdults: Int
+    var numberOfChildren: Int
+    
+    var roomType: RoomType
+    var wifi: Bool
+}
+
+struct RoomType: Equatable {
+    var id: Int
+    var name: String
+    var shortName: String
+    var price: Int
+    
+    static var all: [RoomType] { //TODO: - QUESTION - Why static? Why computed var???
+        return [RoomType(id: 0, name: "Two Queens", shortName: "2Q", price: 179),
+                RoomType(id: 1, name: "One King", shortName: "K", price: 209),
+                RoomType(id: 2, name: "Penthouse Suite", shortName: "PHS", price: 309)]
+    }
+}
+
+//Equatable Protocol Implementation for RoomType
+func ==(lhs: RoomType, rhs: RoomType) -> Bool {
+    return lhs.id == rhs.id
 }
