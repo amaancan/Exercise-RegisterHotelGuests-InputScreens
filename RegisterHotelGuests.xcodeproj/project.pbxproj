@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		516F64061FE897C6005DB798 /* SelectRoomTypeTblVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516F64051FE897C6005DB798 /* SelectRoomTypeTblVC.swift */; };
+		516F64081FE99D40005DB798 /* RoomTypeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516F64071FE99D40005DB798 /* RoomTypeStruct.swift */; };
 		51918B031FE4ABE6005129A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51918B021FE4ABE6005129A2 /* AppDelegate.swift */; };
 		51918B081FE4ABE6005129A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51918B061FE4ABE6005129A2 /* Main.storyboard */; };
 		51918B0A1FE4ABE6005129A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51918B091FE4ABE6005129A2 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		516F64051FE897C6005DB798 /* SelectRoomTypeTblVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoomTypeTblVC.swift; sourceTree = "<group>"; };
+		516F64071FE99D40005DB798 /* RoomTypeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTypeStruct.swift; sourceTree = "<group>"; };
 		51918AFF1FE4ABE6005129A2 /* RegisterHotelGuests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RegisterHotelGuests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51918B021FE4ABE6005129A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51918B071FE4ABE6005129A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				51918B061FE4ABE6005129A2 /* Main.storyboard */,
 				516F64051FE897C6005DB798 /* SelectRoomTypeTblVC.swift */,
 				51918B141FE4AF62005129A2 /* AddRegistrationTableViewController.swift */,
+				516F64071FE99D40005DB798 /* RoomTypeStruct.swift */,
 				51918B091FE4ABE6005129A2 /* Assets.xcassets */,
 				51918B0B1FE4ABE6005129A2 /* LaunchScreen.storyboard */,
 				51918B0E1FE4ABE6005129A2 /* Info.plist */,
@@ -142,6 +145,7 @@
 				516F64061FE897C6005DB798 /* SelectRoomTypeTblVC.swift in Sources */,
 				51918B151FE4AF62005129A2 /* AddRegistrationTableViewController.swift in Sources */,
 				51918B031FE4ABE6005129A2 /* AppDelegate.swift in Sources */,
+				516F64081FE99D40005DB798 /* RoomTypeStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

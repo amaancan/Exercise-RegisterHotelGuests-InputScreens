@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRegistrationTableViewController: UITableViewController {
+class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeTableViewControllerDelegate {
     
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -22,6 +22,7 @@ class AddRegistrationTableViewController: UITableViewController {
     @IBOutlet weak var numberOfAdultsLabel: UILabel!
     @IBOutlet weak var numberOfChildrenLabel: UILabel!
     @IBOutlet weak var wifiSwitch: UISwitch!
+    @IBOutlet weak var roomTypeLabel: UILabel!
     
     //MARK: - QUESTION - "??" ???
     @IBAction func doneBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -33,7 +34,8 @@ class AddRegistrationTableViewController: UITableViewController {
         let numberOfAdults = Int(numberOfAdultsStepper.value)
         let numberOfChildren = Int(numberOfChildrenStepper.value)
         let hasWifi = wifiSwitch.isOn
-    
+        let roomChoice = roomType?.name ?? "Not Set"
+        
         print("DONE TAPPED")
         print("firstName: \(firstName)")
         print("lastName: \(lastName)")
@@ -43,17 +45,18 @@ class AddRegistrationTableViewController: UITableViewController {
         print("numberOfAdults: \(numberOfAdults)")
         print("numberOfChildren: \(numberOfChildren)")
         print("wifi: \(hasWifi)")
+        print("roomType: \(roomChoice)")
     }
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         updateDateViews()
     }
-    
+
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
     updateAdultsAndChildrenLabels()
     }
     @IBAction func wifiSwitchChanged(_ sender: UISwitch) {
     }
-    
+
     let checkInDatePickerCellIndexPath = IndexPath(row: 1, section: 1)
     let checkOutDatePickerCellIndexPath = IndexPath(row: 3, section: 1)
 
@@ -68,13 +71,15 @@ class AddRegistrationTableViewController: UITableViewController {
             checkOutDatePicker.isHidden = !isCheckOutDatePickerShown
         }
     }
+    var roomType: RoomType? // Add a property to hold the selected room type
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetCheckInDatePickerToToday()
         updateDateViews()
         updateAdultsAndChildrenLabels()
-        print(RoomType.all) //TODO: - QUESTION - RoomType is a struct therefore don't need () to access it's variable 'all' but if it was a class, then we would need ()???
+        updateRoomType()
+        //print(RoomType.all) // TODO: - QUESTION - RoomType is a struct therefore don't need () to access it's variable 'all' but if it was a class, then we would need ()???
     }
 
     func resetCheckInDatePickerToToday() {
@@ -82,7 +87,7 @@ class AddRegistrationTableViewController: UITableViewController {
         checkInDatePicker.minimumDate = midnightToday
         checkInDatePicker.date = midnightToday
     }
-    
+
     func updateDateViews() {
         checkOutDatePicker.minimumDate = checkInDatePicker.date.addingTimeInterval(86400)
         let dateFormatter = DateFormatter()
@@ -91,7 +96,7 @@ class AddRegistrationTableViewController: UITableViewController {
         checkInDateLabel.text = dateFormatter.string(from: checkInDatePicker.date)
         checkOutDateLabel.text = dateFormatter.string(from: checkOutDatePicker.date)
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             //Sets the height of each cell in tbl view according to need
         switch (indexPath.section, indexPath.row) {
@@ -140,36 +145,29 @@ class AddRegistrationTableViewController: UITableViewController {
         numberOfAdultsLabel.text = "\(Int(numberOfAdultsStepper.value))"
         numberOfChildrenLabel.text = "\(Int(numberOfChildrenStepper.value))"
     }
-}
-
-struct Registration {
-    var firstName: String
-    var lastName: String
-    var emailAddress: String
     
-    var checkInDate: Date
-    var checkOutDate: Date
-    var numberOfAdults: Int
-    var numberOfChildren: Int
+    func updateRoomType() {
+        if let roomType = roomType {
+            roomTypeLabel.text = roomType.name
+        } else {
+            roomTypeLabel.text = "Not Set"
+        }
+    }
     
-    var roomType: RoomType
-    var wifi: Bool
-}
-
-struct RoomType: Equatable {
-    var id: Int
-    var name: String
-    var shortName: String
-    var price: Int
+    //MARK: - Conforming to protocol SelectRoomTypeTableViewControllerDelegate
+    func didSelect(roomType: RoomType) {
+        self.roomType = roomType
+        updateRoomType()
+    }
     
-    static var all: [RoomType] { //TODO: - QUESTION - Why static? Why computed var???
-        return [RoomType(id: 0, name: "Two Queens", shortName: "2Q", price: 179),
-                RoomType(id: 1, name: "One King", shortName: "K", price: 209),
-                RoomType(id: 2, name: "Penthouse Suite", shortName: "PHS", price: 309)]
+    override func prepare(for segue: UIStoryboardSegue, sender:
+        Any?) {
+        if segue.identifier == "SelectRoomType" {
+            let destinationViewController = segue.destination as? SelectRoomTypeTblVC
+            destinationViewController?.delegate = self
+            destinationViewController?.roomType = roomType //TODO: - QUESTION ???
+        }
     }
 }
 
-//Equatable Protocol Implementation for RoomType
-func ==(lhs: RoomType, rhs: RoomType) -> Bool {
-    return lhs.id == rhs.id
-}
+
