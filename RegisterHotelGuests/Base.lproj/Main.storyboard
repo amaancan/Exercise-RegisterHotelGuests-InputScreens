@@ -438,9 +438,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="Ouf-af-6aJ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="z6R-ls-hyi">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="ZVP-xh-nkJ" id="npV-ef-UH6"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="NlP-Qk-fUD">
                             <connections>
-                                <action selector="doneBarButtonTapped:" destination="ZVP-xh-nkJ" id="NgS-Ay-Lho"/>
+                                <segue destination="JEn-MU-IXp" kind="unwind" unwindAction="unwindFromAddRegistrationWithUnwindSegue:" id="V63-pp-GOy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -461,6 +466,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gDK-gK-Msh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="JEn-MU-IXp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="156" y="131"/>
         </scene>

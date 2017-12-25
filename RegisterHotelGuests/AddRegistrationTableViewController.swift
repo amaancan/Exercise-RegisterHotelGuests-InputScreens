@@ -10,6 +10,8 @@ import UIKit
 
 class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeTableViewControllerDelegate {
     
+    //MARK: - Outlets and Actions
+    
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -24,29 +26,6 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     @IBOutlet weak var wifiSwitch: UISwitch!
     @IBOutlet weak var roomTypeLabel: UILabel!
     
-    //MARK: - QUESTION - "??" ???
-    @IBAction func doneBarButtonTapped(_ sender: UIBarButtonItem) {
-        let firstName = firstNameTextField.text ?? ""
-        let lastName = lastNameTextField.text ?? ""
-        let email = emailTextField.text ?? ""
-        let checkInDate = checkInDatePicker.date
-        let checkOutDate = checkOutDatePicker.date
-        let numberOfAdults = Int(numberOfAdultsStepper.value)
-        let numberOfChildren = Int(numberOfChildrenStepper.value)
-        let hasWifi = wifiSwitch.isOn
-        let roomChoice = roomType?.name ?? "Not Set"
-        
-        print("DONE TAPPED")
-        print("firstName: \(firstName)")
-        print("lastName: \(lastName)")
-        print("email: \(email)")
-        print("checkIn: \(checkInDate)")
-        print("checkOut: \(checkOutDate)")
-        print("numberOfAdults: \(numberOfAdults)")
-        print("numberOfChildren: \(numberOfChildren)")
-        print("wifi: \(hasWifi)")
-        print("roomType: \(roomChoice)")
-    }
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         updateDateViews()
     }
@@ -56,10 +35,15 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
     }
     @IBAction func wifiSwitchChanged(_ sender: UISwitch) {
     }
-
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: - Variables
+    
     let checkInDatePickerCellIndexPath = IndexPath(row: 1, section: 1)
     let checkOutDatePickerCellIndexPath = IndexPath(row: 3, section: 1)
-
+    
     var isCheckInDatePickerShown: Bool = false {
         //Var stores answer to question: Should I show the date picker? Based on response to user touch.
         didSet {
@@ -96,6 +80,8 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
                             roomType: roomType,
                             wifi: hasWifi)
     }
+    
+    //MARK: - Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,6 +170,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         updateRoomType()
     }
     
+    //MARK: - Segues and Prepares
     override func prepare(for segue: UIStoryboardSegue, sender:
         Any?) {
         if segue.identifier == "SelectRoomType" {
