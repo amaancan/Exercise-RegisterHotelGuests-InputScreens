@@ -176,7 +176,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
         if segue.identifier == "SelectRoomType" {
             let destinationViewController = segue.destination as? SelectRoomTypeTblVC
             destinationViewController?.delegate = self
-            destinationViewController?.roomType = roomType //TODO: - QUESTION ???
+            destinationViewController?.roomType = roomType
         }
     }
 }
